@@ -14,11 +14,9 @@ import org.testng.annotations.Test;
 
 public class SimplePostTest {
     private static final Logger LOGGER = LogManager.getLogger(SimplePostTest.class);
-
     @Test
     public void createNewUser() {
         LOGGER.info("-------API Test: Create new user-----------");
-
         RestAssured.baseURI = "https://reqres.in/api/users";
 
         RequestSpecification httpRequest = RestAssured.given();
@@ -43,7 +41,6 @@ public class SimplePostTest {
         Assert.assertEquals(response.getStatusCode(), 201);
 
         JsonPath jsonPath = response.jsonPath();
-
         String actualName = jsonPath.getString("name");
         Assert.assertEquals(actualName, fullName);
 

@@ -18,7 +18,6 @@ public class SimplePutTest {
     public void updateUserFields() {
         LOGGER.info("-------API Test: Update user fields-----------");
         RestAssured.baseURI = "https://reqres.in/api/users/";
-
         RequestSpecification httpRequest = RestAssured.given();
 
         Faker faker = new Faker();
@@ -42,7 +41,6 @@ public class SimplePutTest {
         Assert.assertEquals(response.getStatusCode(), 200);
 
         JsonPath jsonPath = response.jsonPath();
-
         String actualName = jsonPath.getString("name");
         Assert.assertEquals(actualName, fullName);
 
