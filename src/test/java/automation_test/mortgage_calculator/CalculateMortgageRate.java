@@ -3,6 +3,7 @@ package automation_test.mortgage_calculator;
 import command_providers.ActOn;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import listeners.LoggerForParallelTests;
+import listeners.RetryFailedTests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +29,7 @@ public class CalculateMortgageRate extends LoggerForParallelTests {
         ActOn.browser(driver).openBrowser(url);
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryFailedTests.class)
     public void calculateMortgage() {
         String[] date = DateUtils.returnNextMonth().split("-");
         new Home(driver)
