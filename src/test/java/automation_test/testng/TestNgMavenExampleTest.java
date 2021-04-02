@@ -13,6 +13,7 @@ import java.sql.SQLException;
 public class TestNgMavenExampleTest {
     private static final Logger LOGGER = LogManager.getLogger(TestNgMavenExampleTest.class);
 
+    @Test
     public void run() {
         LOGGER.debug("This is a debug message");
         LOGGER.info("This is info message");
@@ -34,7 +35,7 @@ public class TestNgMavenExampleTest {
         }
     }
 
-    @Test(dataProvider = "MultipleValues", dataProviderClass = DataProviderClass.class)
+    //@Test(dataProvider = "MultipleValues", dataProviderClass = DataProviderClass.class)
     public void readMultipleValues(String name, String state, int zipCode) {
         System.out.println("Name is: " + name);
         System.out.println("State name is: " + state);

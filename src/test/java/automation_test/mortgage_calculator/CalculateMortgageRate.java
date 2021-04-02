@@ -2,6 +2,7 @@ package automation_test.mortgage_calculator;
 
 import command_providers.ActOn;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import listeners.LoggerForParallelTests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ import page_objects.Home;
 import utilities.DateUtils;
 import utilities.ReadConfigFiles;
 
-public class CalculateMortgageRate {
+public class CalculateMortgageRate extends LoggerForParallelTests {
     WebDriver driver;
     private static final Logger LOGGER = LogManager.getLogger(CalculateMortgageRate.class);
 
@@ -51,7 +52,7 @@ public class CalculateMortgageRate {
 
     @AfterMethod
     public void closeBrowser() {
-        LOGGER.info("--------Test End: CalculateMortgageRate------------");
         ActOn.browser(driver).closeBrowser();
+        LOGGER.info("--------Test End: CalculateMortgageRate------------");
     }
 }
