@@ -108,7 +108,7 @@ public class CalculateRefinance {
     }
     @AfterMethod
     public void closeBrowser(){
-        driver.quit();
         LOGGER.info("--------Test End: CalculateRefinance------------");
+        driver.quit();
     }
 }
