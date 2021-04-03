@@ -1,19 +1,15 @@
 package automation_test.mortgage_calculator;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import listeners.BaseClass;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 
-public class CalculateRefinance {
+public class CalculateRefinance extends BaseClass {
     private final By HomePrice = By.name("HomeValue");
     private final By Refinance = By.linkText("Refinance");
     private final By RefinanceCalculator =By.linkText("Refi Calculator");
@@ -33,17 +29,8 @@ public class CalculateRefinance {
     private final By CalculateButton = By.name("calculate");
     private final By TotalRefinancingBenefit = By.xpath("//*[@id='analysisDiv']/table//strong[contains(text(),'Total Refinancing')]/../../td/h3");
 
-    WebDriver driver;
     private static final Logger LOGGER = LogManager.getLogger(CalculateRefinance.class);
 
-    @BeforeMethod
-    public void openBrowser(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        LOGGER.info("--------Test: CalculateRefinance------------");
-        driver.get("https://www.mortgagecalculator.org/");
-        driver.manage().window().maximize();
-    }
     public void navigateToRefinancePage(){
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(Refinance)).perform();
@@ -95,6 +82,7 @@ public class CalculateRefinance {
         driver.findElement(StateTax).sendKeys("5.000");
 
     }
+
     @Test
     public void calculateTotalRefi(){
         driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
@@ -105,10 +93,5 @@ public class CalculateRefinance {
 
         String actualRefinancingBenefit = driver.findElement(TotalRefinancingBenefit).getText();
         Assert.assertEquals(actualRefinancingBenefit,"$3,513.91", "Total Refinancing Benefit did not matched");
-    }
-    @AfterMethod
-    public void closeBrowser(){
-        LOGGER.info("--------Test End: CalculateRefinance------------");
-        driver.quit();
     }
 }
