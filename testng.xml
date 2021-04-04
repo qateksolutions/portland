@@ -7,7 +7,6 @@
             <class name="selenium_grid.SeleniumGrid_Chrome2" />
             <class name="selenium_grid.SeleniumGrid_Chrome3" />
             <class name="selenium_grid.SeleniumGrid_Firefox" />
-            <class name="selenium_grid.SeleniumGrid_Edge" />
         </classes>
     </test>
 </suite>
