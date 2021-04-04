@@ -1,16 +1,17 @@
 package listeners;
 
 import command_providers.ActOn;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import utilities.ReadConfigFiles;
+import utilities.TestEnvironment;
+
+import java.net.MalformedURLException;
 
 public class BaseClass {
     public static WebDriver driver;
@@ -24,10 +25,9 @@ public class BaseClass {
     }
 
     @BeforeMethod
-    public void openBrowser() {
+    public void openBrowser() throws MalformedURLException {
         String url = ReadConfigFiles.getPropertyValues("Url");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = TestEnvironment.selectTestExecutionEnvironment();
         LOGGER.info(testCaseName);
         LOGGER.debug("Open the URL: " + url);
         ActOn.browser(driver).openBrowser(url);

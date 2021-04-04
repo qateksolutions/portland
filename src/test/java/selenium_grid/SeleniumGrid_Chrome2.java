@@ -1,22 +1,17 @@
 package selenium_grid;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
+import utilities.TestEnvironment;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 public class SeleniumGrid_Chrome2 {
     WebDriver driver;
-    URL gridUrl;
 
     @Test
     public void executeInAwsDocker() throws MalformedURLException {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        gridUrl = new URL("http://100.26.182.142:4444/wd/hub");
-        driver = new RemoteWebDriver(gridUrl, chromeOptions);
+        driver = TestEnvironment.selectTestExecutionEnvironment();
         driver.get("https://www.google.com/");
         System.out.println("Google Title: " + driver.getTitle());
         driver.quit();
